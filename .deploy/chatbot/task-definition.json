@@ -3,52 +3,54 @@
   "taskRoleArn": "arn:aws:iam::828165198279:role/loilo-chatbot-ui-ecs-task-role",
   "executionRoleArn": "arn:aws:iam::828165198279:role/lns-prd-ecs-task-execution-role",
   "networkMode": "awsvpc",
-  "containerDefinitions": {
-    "environment": [],
-    "essential": true,
-    "image": "828165198279.dkr.ecr.us-west-2.amazonaws.com/loilo-chatbot:${IMAGE_TAG}",
-    "linuxParameters": {
-      "initProcessEnabled": true
-    },
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-group": "loilo-chatbot",
-        "awslogs-region": "us-west-2",
-        "awslogs-stream-prefix": "ui"
-      }
-    },
-    "mountPoints": [],
-    "name": "loilo-chatbot-ui",
-    "portMappings": [
-      {
-        "containerPort": 3000,
-        "hostPort": 3000
-      }
-    ],
-    "privileged": false,
-    "secrets": [
-      {
-        "name": "OPENAI_API_KEY",
-        "valueFrom": "/chatbot/openai/api_key"
+  "containerDefinitions": [
+    {
+      "environment": [],
+      "essential": true,
+      "image": "828165198279.dkr.ecr.us-west-2.amazonaws.com/loilo-chatbot:${IMAGE_TAG}",
+      "linuxParameters": {
+        "initProcessEnabled": true
       },
-      {
-        "name": "BASIC_AUTH_USER",
-        "valueFrom": "/chatbot/basic_auth/user"
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "loilo-chatbot",
+          "awslogs-region": "us-west-2",
+          "awslogs-stream-prefix": "ui"
+        }
       },
-      {
-        "name": "BASIC_AUTH_PASSWORD",
-        "valueFrom": "/chatbot/basic_auth/pass"
-      }
-    ],
-    "ulimits": [
-      {
-        "hardLimit": 65535,
-        "name": "nofile",
-        "softLimit": 65000
-      }
-    ]
-  },
+      "mountPoints": [],
+      "name": "loilo-chatbot-ui",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000
+        }
+      ],
+      "privileged": false,
+      "secrets": [
+        {
+          "name": "OPENAI_API_KEY",
+          "valueFrom": "/chatbot/openai/api_key"
+        },
+        {
+          "name": "BASIC_AUTH_USER",
+          "valueFrom": "/chatbot/basic_auth/user"
+        },
+        {
+          "name": "BASIC_AUTH_PASSWORD",
+          "valueFrom": "/chatbot/basic_auth/pass"
+        }
+      ],
+      "ulimits": [
+        {
+          "hardLimit": 65535,
+          "name": "nofile",
+          "softLimit": 65000
+        }
+      ]
+    }
+  ],
   "requiresCompatibilities": [
     "FARGATE"
   ],
