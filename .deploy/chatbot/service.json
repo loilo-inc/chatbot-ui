@@ -1,0 +1,34 @@
+{
+  "cluster": "lns-production",
+  "serviceName": "loilo-chatbot-ui",
+  "taskDefinition": "dummy",
+  "platformVersion": "1.4.0",
+  "loadBalancers": [
+    {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:828165198279:targetgroup/loilo-chatbot/4e8015083ebc50f2",
+      "containerName": "loilo-chatbot-ui",
+      "containerPort": 3000
+    }
+  ],
+  "desiredCount": 1,
+  "launchType": "FARGATE",
+  "deploymentConfiguration": {
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 100
+  },
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "subnets": [
+        "subnet-02a049660a0dafa03",
+        "subnet-0b456c8ba7612f3d9",
+        "subnet-072c926ecaa9933ec"
+      ],
+      "securityGroups": [
+        "sg-041fb92a35aac7a7c"
+      ],
+      "assignPublicIp": "DISABLED"
+    }
+  },
+  "healthCheckGracePeriodSeconds": 120,
+  "enableExecuteCommand": false
+}
