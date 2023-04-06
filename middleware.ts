@@ -4,6 +4,10 @@ const BASIC_AUTH_USER = process.env.BASIC_AUTH_USER || "user";
 const BASIC_AUTH_PASSWORD = process.env.BASIC_AUTH_PASSWORD || "password";
 
 export function middleware(req: NextRequest) {
+    if (req.nextUrl.pathname === '/api/health_check') {
+        return NextResponse.next()
+    }
+
     const basicAuth = req.headers.get("authorization");
 
     if (basicAuth) {
