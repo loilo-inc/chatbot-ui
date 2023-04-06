@@ -2,8 +2,9 @@ version: '3.6'
 
 services:
   chatgpt:
-    build: .
+    container_name: 'loilo-chatbot-ui'
+    image: 'loilo-chatbot:latest'
     ports:
-      - 3000:3000
-    environment:
-      - 'OPENAI_API_KEY='
+      - '3000:3000'
+    env_file:
+      - .env.local
